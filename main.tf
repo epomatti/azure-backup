@@ -46,4 +46,5 @@ module "backup_vault_store" {
   bvault_retention_duration_in_days   = var.bvault_retention_duration_in_days
   bvault_soft_delete                  = var.bvault_soft_delete
   bvault_cross_region_restore_enabled = var.bvault_cross_region_restore_enabled
+  disk_id                             = module.virtual_machine.disk_id
 }

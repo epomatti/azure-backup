@@ -29,3 +29,7 @@ variable "bvault_soft_delete" {
 variable "bvault_cross_region_restore_enabled" {
   type = bool
 }
+
+variable "disk_id" {
+  type = string
+}
