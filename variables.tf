@@ -64,3 +64,24 @@ variable "bvault_soft_delete" {
 variable "bvault_cross_region_restore_enabled" {
   type = string
 }
+
+### Recovery Services Vault ###
+variable "rsv_sku" {
+  type = string
+}
+
+variable "rsv_immutability" {
+  type = string
+}
+
+variable "rsv_storage_mode_type" {
+  type = string
+}
+
+variable "rsv_cross_region_restore_enabled" {
+  type = string
+}
+
+variable "rsv_soft_delete_enabled" {
+  type = string
+}

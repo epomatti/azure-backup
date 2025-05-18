@@ -30,9 +30,11 @@ resource "azurerm_linux_virtual_machine" "main" {
   admin_username        = var.vm_admin_username
   network_interface_ids = [azurerm_network_interface.main.id]
 
-  secure_boot_enabled               = true
-  vtpm_enabled                      = true
-  vm_agent_platform_updates_enabled = false # Setting to false for Linux. Seems to work only for Windows
+  secure_boot_enabled = true
+  vtpm_enabled        = true
+
+  bypass_platform_safety_checks_on_user_schedule_enabled = true
+  patch_mode                                             = "AutomaticByPlatform"
 
   custom_data = filebase64("${path.module}/custom_data/ubuntu.sh")
 
