@@ -1,29 +1,28 @@
 ### General ###
 location                   = "eastus2"
-workload                   = "workload"
-public_ip_address_to_allow = ""
-subscription_id            = ""
-
-
-### Key Vault ###
-# Required for disk encryption by the Key Vault
-keyvault_purge_protection_enabled = false
-
-# AKV Premium
-keyvault_sku_name = "premium"
-keyvault_key_type = "RSA-HSM"
-keyvault_key_size = 4096
-
+workload                   = "litware"
+public_ip_address_to_allow = "100.100.100.100"
+subscription_id            = "00000000-0000-0000-0000-000000000000"
 
 ### Virtual Machine ###
 vm_admin_username  = "azureuser"
 vm_public_key_path = ".keys/tmp_rsa.pub"
 vm_size            = "Standard_B2ls_v2"
-
-vm_identity_type        = "UserAssigned"           # Options: "SystemAssigned", "UserAssigned", "SystemAssigned, UserAssigned"
-vm_role_definition_name = "Key Vault Secrets User" # The role assigned to the VM identity
-
 vm_image_publisher = "canonical"
 vm_image_offer     = "ubuntu-24_04-lts"
 vm_image_sku       = "server"
 vm_image_version   = "latest"
+
+### Backup Vaults - VaultStore ###
+bvault_redundancy                   = "LocallyRedundant"
+bvault_retention_duration_in_days   = 14 # Required when soft delete is "On"
+bvault_immutability                 = "Disabled"
+bvault_soft_delete                  = "Off"
+bvault_cross_region_restore_enabled = null # Onfy for "GeoRedundant" redundancy
+
+### Recovery Services Vault ###
+rsv_sku                          = "Standard"
+rsv_immutability                 = "Disabled"
+rsv_storage_mode_type            = "LocallyRedundant"
+rsv_cross_region_restore_enabled = false
+rsv_soft_delete_enabled          = false

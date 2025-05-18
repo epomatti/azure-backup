@@ -48,15 +48,15 @@ module "recover_services" {
   rsv_soft_delete_enabled          = var.rsv_soft_delete_enabled
 }
 
-# module "backup_vault_store" {
-#   source                              = "./modules/backup-vault"
-#   workload                            = var.workload
-#   resource_group_name                 = azurerm_resource_group.default.name
-#   location                            = azurerm_resource_group.default.location
-#   bvault_redundancy                   = var.bvault_redundancy
-#   bvault_immutability                 = var.bvault_immutability
-#   bvault_retention_duration_in_days   = var.bvault_retention_duration_in_days
-#   bvault_soft_delete                  = var.bvault_soft_delete
-#   bvault_cross_region_restore_enabled = var.bvault_cross_region_restore_enabled
-#   disk_id                             = module.virtual_machine.disk_id
-# }
+module "backup_vault_store" {
+  source                              = "./modules/backup-vault"
+  workload                            = var.workload
+  resource_group_name                 = azurerm_resource_group.default.name
+  location                            = azurerm_resource_group.default.location
+  bvault_redundancy                   = var.bvault_redundancy
+  bvault_immutability                 = var.bvault_immutability
+  bvault_retention_duration_in_days   = var.bvault_retention_duration_in_days
+  bvault_soft_delete                  = var.bvault_soft_delete
+  bvault_cross_region_restore_enabled = var.bvault_cross_region_restore_enabled
+  disk_id                             = module.virtual_machine.disk_id
+}

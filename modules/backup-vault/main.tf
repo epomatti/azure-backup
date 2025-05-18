@@ -14,38 +14,38 @@ resource "azurerm_data_protection_backup_vault" "default" {
   }
 }
 
-resource "azurerm_data_protection_backup_policy_disk" "default" {
-  name     = "bkpol-${var.workload}"
-  vault_id = azurerm_data_protection_backup_vault.default.id
+# resource "azurerm_data_protection_backup_policy_disk" "default" {
+#   name     = "bkpol-${var.workload}"
+#   vault_id = azurerm_data_protection_backup_vault.default.id
 
-  backup_repeating_time_intervals = ["R/2021-05-19T06:33:16+00:00/PT4H"]
-  default_retention_duration      = "P7D"
-  time_zone                       = "W. Europe Standard Time"
+#   backup_repeating_time_intervals = ["R/2021-05-19T06:33:16+00:00/PT4H"]
+#   default_retention_duration      = "P7D"
+#   time_zone                       = "W. Europe Standard Time"
 
-  retention_rule {
-    name     = "Daily"
-    duration = "P7D"
-    priority = 25
-    criteria {
-      absolute_criteria = "FirstOfDay"
-    }
-  }
+#   retention_rule {
+#     name     = "Daily"
+#     duration = "P7D"
+#     priority = 25
+#     criteria {
+#       absolute_criteria = "FirstOfDay"
+#     }
+#   }
 
-  retention_rule {
-    name     = "Weekly"
-    duration = "P7D"
-    priority = 20
-    criteria {
-      absolute_criteria = "FirstOfWeek"
-    }
-  }
-}
+#   retention_rule {
+#     name     = "Weekly"
+#     duration = "P7D"
+#     priority = 20
+#     criteria {
+#       absolute_criteria = "FirstOfWeek"
+#     }
+#   }
+# }
 
-resource "azurerm_data_protection_backup_instance_disk" "default" {
-  name                         = "backup-instance"
-  location                     = var.location
-  vault_id                     = azurerm_data_protection_backup_vault.default.id
-  disk_id                      = var.disk_id
-  snapshot_resource_group_name = var.resource_group_name
-  backup_policy_id             = azurerm_data_protection_backup_policy_disk.default.id
-}
+# resource "azurerm_data_protection_backup_instance_disk" "default" {
+#   name                         = "backup-instance"
+#   location                     = var.location
+#   vault_id                     = azurerm_data_protection_backup_vault.default.id
+#   disk_id                      = var.disk_id
+#   snapshot_resource_group_name = var.resource_group_name
+#   backup_policy_id             = azurerm_data_protection_backup_policy_disk.default.id
+# }
