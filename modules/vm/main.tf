@@ -38,6 +38,10 @@ resource "azurerm_linux_virtual_machine" "main" {
 
   custom_data = filebase64("${path.module}/custom_data/ubuntu.sh")
 
+  identity {
+    type = "SystemAssigned"
+  }
+
   admin_ssh_key {
     username   = var.vm_admin_username
     public_key = file(var.vm_public_key_path)
