@@ -7,6 +7,10 @@ terraform {
   }
 }
 
+locals {
+  allowed_public_cidrs = ["${var.public_ip_address_to_allow}/30"]
+}
+
 resource "azurerm_resource_group" "default" {
   name     = "rg-${var.workload}-default"
   location = var.location
@@ -59,4 +63,12 @@ module "backup_vault_store" {
   bvault_soft_delete                  = var.bvault_soft_delete
   bvault_cross_region_restore_enabled = var.bvault_cross_region_restore_enabled
   disk_id                             = module.virtual_machine.disk_id
+}
+
+module "storage" {
+  source               = "./modules/storage-account"
+  workload             = var.workload
+  resource_group_name  = azurerm_resource_group.default.name
+  location             = azurerm_resource_group.default.location
+  allowed_public_cidrs = local.allowed_public_cidrs
 }
