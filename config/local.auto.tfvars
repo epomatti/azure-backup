@@ -29,4 +29,4 @@ rsv_soft_delete_enabled          = false
 
 ### PostgreSQL ###
 postgresql_version  = "16"
-postgresql_sku_name = "B_Standard_B1ms"
+postgresql_sku_name = "GP_Standard_D2ds_v4" # Standard required for on-demand backups: GP_Standard_D2ds_v4
