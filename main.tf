@@ -72,3 +72,14 @@ module "storage" {
   location             = azurerm_resource_group.default.location
   allowed_public_cidrs = local.allowed_public_cidrs
 }
+
+module "postgresql" {
+  source               = "./modules/postgresql"
+  workload             = var.workload
+  resource_group_name  = azurerm_resource_group.default.name
+  location             = azurerm_resource_group.default.location
+  postgresql_version   = var.postgresql_version
+  postgresql_sku_name  = var.postgresql_sku_name
+  vnet_id              = module.vnet.vnet_id
+  postgresql_subnet_id = module.vnet.postgresql_subnet_id
+}

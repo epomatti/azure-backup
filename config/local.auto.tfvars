@@ -26,3 +26,7 @@ rsv_immutability                 = "Disabled"
 rsv_storage_mode_type            = "LocallyRedundant"
 rsv_cross_region_restore_enabled = false
 rsv_soft_delete_enabled          = false
+
+### PostgreSQL ###
+postgresql_version  = "16"
+postgresql_sku_name = "B_Standard_B1ms"

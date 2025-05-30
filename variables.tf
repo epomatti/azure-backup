@@ -85,3 +85,12 @@ variable "rsv_cross_region_restore_enabled" {
 variable "rsv_soft_delete_enabled" {
   type = string
 }
+
+#### PostgreSQL ###
+variable "postgresql_version" {
+  type = string
+}
+
+variable "postgresql_sku_name" {
+  type = string
+}
