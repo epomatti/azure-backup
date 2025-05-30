@@ -17,7 +17,7 @@ resource "azurerm_resource_group" "default" {
 }
 
 module "vnet" {
-  source              = "./modules/vnet"
+  source              = "./modules/virtual-network"
   workload            = var.workload
   resource_group_name = azurerm_resource_group.default.name
   location            = azurerm_resource_group.default.location
@@ -25,7 +25,7 @@ module "vnet" {
 }
 
 module "virtual_machine" {
-  source              = "./modules/vm"
+  source              = "./modules/virtual-machine"
   location            = azurerm_resource_group.default.location
   resource_group_name = azurerm_resource_group.default.name
   workload            = var.workload
