@@ -64,3 +64,19 @@ resource "azurerm_linux_virtual_machine" "main" {
     ignore_changes = [custom_data]
   }
 }
+
+resource "azurerm_managed_disk" "data_disk" {
+  name                 = "disk-${var.workload}"
+  location             = var.location
+  resource_group_name  = var.resource_group_name
+  storage_account_type = "StandardSSD_LRS"
+  create_option        = "Empty"
+  disk_size_gb         = "20"
+}
+
+resource "azurerm_virtual_machine_data_disk_attachment" "data_disk" {
+  managed_disk_id    = azurerm_managed_disk.data_disk.id
+  virtual_machine_id = azurerm_linux_virtual_machine.main.id
+  lun                = "10"
+  caching            = "ReadOnly"
+}

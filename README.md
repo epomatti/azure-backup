@@ -45,7 +45,7 @@ Takes care of managing copies over a long period of time for various Azure resou
 
 ## Managed Disk Snapshots
 
-Managed Disk Snapshots are a separate resource and are managed independently.
+Managed Disk Snapshots are a separate resource and are managed independently. For this project an additional data disk is attached.
 
 Create a snapshot quickly by using the CLI:
 
