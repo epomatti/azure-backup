@@ -14,10 +14,16 @@ resource "azurerm_data_protection_backup_vault" "default" {
   }
 }
 
-resource "azurerm_data_protection_backup_policy_blob_storage" "example" {
+resource "azurerm_data_protection_backup_policy_blob_storage" "default" {
   name                                   = "default-backup-policy"
   vault_id                               = azurerm_data_protection_backup_vault.default.id
   operational_default_retention_duration = "P30D"
+}
+
+resource "azurerm_data_protection_backup_policy_blob_storage" "short_term" {
+  name                                   = "short-term-backup-policy"
+  vault_id                               = azurerm_data_protection_backup_vault.default.id
+  operational_default_retention_duration = "P7D"
 }
 
 # resource "azurerm_data_protection_backup_policy_disk" "default" {
