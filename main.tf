@@ -74,12 +74,27 @@ module "storage" {
 }
 
 module "postgresql" {
-  source               = "./modules/postgresql"
-  workload             = var.workload
-  resource_group_name  = azurerm_resource_group.default.name
-  location             = azurerm_resource_group.default.location
-  postgresql_version   = var.postgresql_version
-  postgresql_sku_name  = var.postgresql_sku_name
-  vnet_id              = module.vnet.vnet_id
-  postgresql_subnet_id = module.vnet.postgresql_subnet_id
+  source                       = "./modules/postgresql"
+  workload                     = var.workload
+  resource_group_name          = azurerm_resource_group.default.name
+  location                     = azurerm_resource_group.default.location
+  postgresql_version           = var.postgresql_version
+  postgresql_sku_name          = var.postgresql_sku_name
+  vnet_id                      = module.vnet.vnet_id
+  postgresql_subnet_id         = module.vnet.postgresql_subnet_id
+  high_availability_mode       = var.postgresql_high_availability_mode
+  geo_redundant_backup_enabled = var.postgresql_geo_redundant_backup_enabled
+}
+
+# Required permissions for the Backup Vault to manage PostgreSQL backups
+resource "azurerm_role_assignment" "backup_vault_rg_reader" {
+  scope                = azurerm_resource_group.default.id
+  role_definition_name = "Reader"
+  principal_id         = module.backup_vault_store.backup_vault_principal_id
+}
+
+resource "azurerm_role_assignment" "backup_vault_postgresql_long_term_retention_backup_role" {
+  scope                = module.postgresql.server_id
+  role_definition_name = "PostgreSQL Flexible Server Long Term Retention Backup Role"
+  principal_id         = module.backup_vault_store.backup_vault_principal_id
 }

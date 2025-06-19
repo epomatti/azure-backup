@@ -15,16 +15,20 @@ resource "azurerm_postgresql_flexible_server" "default" {
   resource_group_name           = var.resource_group_name
   location                      = var.location
   version                       = var.postgresql_version
+  sku_name                      = var.postgresql_sku_name
   delegated_subnet_id           = var.postgresql_subnet_id
   private_dns_zone_id           = azurerm_private_dns_zone.default.id
   public_network_access_enabled = false
   administrator_login           = "psqladmin"
   administrator_password        = "H@Sh1CoR3!"
   zone                          = "1"
+  storage_mb                    = 32768
+  storage_tier                  = "P4"
+  geo_redundant_backup_enabled  = var.geo_redundant_backup_enabled
 
-  storage_mb   = 32768
-  storage_tier = "P4"
+  high_availability {
+    mode = var.high_availability_mode
+  }
 
-  sku_name   = var.postgresql_sku_name
   depends_on = [azurerm_private_dns_zone_virtual_network_link.default]
 }

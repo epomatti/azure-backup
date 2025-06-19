@@ -94,3 +94,11 @@ variable "postgresql_version" {
 variable "postgresql_sku_name" {
   type = string
 }
+
+variable "postgresql_high_availability_mode" {
+  type = string
+}
+
+variable "postgresql_geo_redundant_backup_enabled" {
+  type = bool
+}
