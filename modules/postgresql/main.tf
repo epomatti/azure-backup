@@ -26,8 +26,11 @@ resource "azurerm_postgresql_flexible_server" "default" {
   storage_tier                  = "P4"
   geo_redundant_backup_enabled  = var.geo_redundant_backup_enabled
 
-  high_availability {
-    mode = var.high_availability_mode
+  dynamic "high_availability" {
+    for_each = var.high_availability_mode == "SameZone" || var.high_availability_mode == "ZoneRedundant" ? [1] : []
+    content {
+      mode = var.high_availability_mode
+    }
   }
 
   depends_on = [azurerm_private_dns_zone_virtual_network_link.default]
